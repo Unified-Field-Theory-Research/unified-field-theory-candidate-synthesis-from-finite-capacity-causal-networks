@@ -9,3 +9,6 @@
 - Added fail-closed Rust and Lean guards showing the initial skeleton does not
   close the unified field theory candidate synthesis theorem.
 - Recorded `UFTS-002` as the active next obligation.
+- Closed `UFTS-002` by adding finite candidate-synthesis record contracts as
+  bounded, auditable, non-promoting interface rows in Lean and Rust.
+- Advanced the active obligation to `UFTS-003`.

@@ -9,7 +9,8 @@ Paper 18 in the finite-capacity causal-network theorem ladder.
 ## Status
 
 Open. `UFTS-001` is closed as an upstream binding to the frozen Paper 17 result.
-`UFTS-002` is active.
+`UFTS-002` is closed as the finite candidate-synthesis record contract.
+`UFTS-003` is active.
 
 The Paper 18 theorem is not closed. This repository does not claim candidate
 synthesis success, a unified field theory, physical nature realization,
@@ -27,8 +28,8 @@ promotion attempt success.
 
 ## Active Obligation
 
-`UFTS-002`: define finite unified-field-theory candidate synthesis records as
-bounded, auditable, non-promoting interface rows.
+`UFTS-003`: define finite assumption, dependency, and gate-reference
+descriptors without dependency sufficiency or gate success.
 
 ## Verification
 

@@ -4,16 +4,16 @@
 
 - `UFTS-001`: Upstream binding and claim-boundary scaffold through the frozen
   Paper 17 final conditional certificate.
+- `UFTS-002`: Finite unified-field-theory candidate synthesis records as
+  bounded, auditable, non-promoting interface rows.
 
 ## Active
 
-- `UFTS-002`: Define finite unified-field-theory candidate synthesis records as
-  bounded, auditable, non-promoting interface rows.
+- `UFTS-003`: Define finite assumption, dependency, and gate-reference
+  descriptors without dependency sufficiency or gate success.
 
 ## Planned
 
-- `UFTS-003`: Define finite assumption, dependency, and gate-reference
-  descriptors without dependency sufficiency or gate success.
 - `UFTS-004`: Define finite synthesis consistency, conflict, and residual-risk
   descriptors without consistency success or risk discharge.
 - `UFTS-005`: Define Paper 17 physical-promotion-attempt compatibility rows

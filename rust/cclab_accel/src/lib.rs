@@ -22,6 +22,7 @@ pub const PAPER17_FINAL_CERTIFICATE: &str =
 
 pub const PAPER18_SKELETON_MARKER: &str =
     "paper18-unified-field-theory-candidate-synthesis-ufts001-nonpromoting-skeleton";
+pub const UFTS002_MAX_LABELS_PER_FIELD: usize = 8;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct UpstreamPaper {
@@ -224,6 +225,100 @@ impl UFTS001UpstreamBinding {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct CandidateSynthesisRecord {
+    pub candidate_identifier: &'static str,
+    pub synthesis_scope_label: &'static str,
+    pub upstream_dependency_labels: &'static [&'static str],
+    pub gate_reference_labels: &'static [&'static str],
+    pub unresolved_risk_labels: &'static [&'static str],
+    pub conflict_labels: &'static [&'static str],
+    pub audit_status_descriptor: &'static str,
+    pub claim_boundary: Paper18ClaimBoundary,
+}
+
+impl CandidateSynthesisRecord {
+    pub const fn new(
+        candidate_identifier: &'static str,
+        synthesis_scope_label: &'static str,
+        upstream_dependency_labels: &'static [&'static str],
+        gate_reference_labels: &'static [&'static str],
+        unresolved_risk_labels: &'static [&'static str],
+        conflict_labels: &'static [&'static str],
+        audit_status_descriptor: &'static str,
+    ) -> Self {
+        Self {
+            candidate_identifier,
+            synthesis_scope_label,
+            upstream_dependency_labels,
+            gate_reference_labels,
+            unresolved_risk_labels,
+            conflict_labels,
+            audit_status_descriptor,
+            claim_boundary: Paper18ClaimBoundary::non_promoting(),
+        }
+    }
+
+    pub fn is_bounded_auditable_non_promoting(&self) -> bool {
+        finite_label(self.candidate_identifier)
+            && finite_label(self.synthesis_scope_label)
+            && finite_label(self.audit_status_descriptor)
+            && finite_label_set(self.upstream_dependency_labels)
+            && finite_label_set(self.gate_reference_labels)
+            && finite_label_set(self.unresolved_risk_labels)
+            && finite_label_set(self.conflict_labels)
+            && self.audit_status_descriptor == "bounded-auditable-nonpromoting"
+            && self
+                .claim_boundary
+                .all_unified_field_and_physical_success_claims_remain_false()
+    }
+}
+
+pub const UFTS002_UPSTREAM_DEPENDENCIES: [&str; 3] = [
+    "paper17-final-conditional-certificate",
+    "paper17-formal-endpoint",
+    "paper1-through-paper17-frozen-chain",
+];
+pub const UFTS002_GATE_REFERENCES: [&str; 4] = [
+    "finite-capacity-boundary",
+    "locality-boundary",
+    "bounded-transfer-boundary",
+    "paper18-nonpromotion-boundary",
+];
+pub const UFTS002_UNRESOLVED_RISKS: [&str; 4] = [
+    "candidate-synthesis-not-success",
+    "no-empirical-adequacy",
+    "no-physical-validation",
+    "no-review-reproduction-success",
+];
+pub const UFTS002_CONFLICT_LABELS: [&str; 3] = [
+    "no-completed-uft-claim",
+    "no-physical-nature-claim",
+    "no-simulation-fit-shortcut",
+];
+
+pub const CANONICAL_UFTS002_RECORDS: [CandidateSynthesisRecord; 1] =
+    [CandidateSynthesisRecord::new(
+        "ufts-candidate-interface-row-001",
+        "finite-candidate-synthesis-interface",
+        &UFTS002_UPSTREAM_DEPENDENCIES,
+        &UFTS002_GATE_REFERENCES,
+        &UFTS002_UNRESOLVED_RISKS,
+        &UFTS002_CONFLICT_LABELS,
+        "bounded-auditable-nonpromoting",
+    )];
+
+pub fn canonical_ufts002_records() -> &'static [CandidateSynthesisRecord] {
+    &CANONICAL_UFTS002_RECORDS
+}
+
+pub fn ufts002_finite_candidate_synthesis_record_closed() -> bool {
+    !CANONICAL_UFTS002_RECORDS.is_empty()
+        && CANONICAL_UFTS002_RECORDS
+            .iter()
+            .all(CandidateSynthesisRecord::is_bounded_auditable_non_promoting)
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Paper18SkeletonCertificate {
     pub ufts001_upstream_binding_closed: bool,
     pub ufts002_finite_candidate_synthesis_record_closed: bool,
@@ -241,6 +336,21 @@ impl Paper18SkeletonCertificate {
         Self {
             ufts001_upstream_binding_closed: true,
             ufts002_finite_candidate_synthesis_record_closed: false,
+            ufts003_assumption_dependency_gate_reference_closed: false,
+            ufts004_consistency_conflict_risk_closed: false,
+            ufts005_paper17_promotion_attempt_compatibility_closed: false,
+            ufts006_stability_audit_rollback_closed: false,
+            ufts007_no_hidden_unified_field_nature_validation_audit_closed: false,
+            ufts008_final_conditional_certificate_closed: false,
+            claim_boundary: Paper18ClaimBoundary::non_promoting(),
+        }
+    }
+
+    pub fn after_ufts002() -> Self {
+        Self {
+            ufts001_upstream_binding_closed: true,
+            ufts002_finite_candidate_synthesis_record_closed:
+                ufts002_finite_candidate_synthesis_record_closed(),
             ufts003_assumption_dependency_gate_reference_closed: false,
             ufts004_consistency_conflict_risk_closed: false,
             ufts005_paper17_promotion_attempt_compatibility_closed: false,
@@ -271,9 +381,19 @@ pub fn paper18_skeleton_marker() -> &'static str {
 }
 
 pub fn active_obligation() -> &'static str {
-    "UFTS-002"
+    "UFTS-003"
 }
 
 pub fn is_sha1_hex(value: &str) -> bool {
     value.len() == 40 && value.bytes().all(|byte| byte.is_ascii_hexdigit())
+}
+
+pub fn finite_label(value: &str) -> bool {
+    !value.trim().is_empty()
+}
+
+pub fn finite_label_set(values: &[&str]) -> bool {
+    !values.is_empty()
+        && values.len() <= UFTS002_MAX_LABELS_PER_FIELD
+        && values.iter().all(|value| finite_label(value))
 }

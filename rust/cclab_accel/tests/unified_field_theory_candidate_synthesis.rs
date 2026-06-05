@@ -2,8 +2,10 @@ use std::fs;
 use std::path::{Path, PathBuf};
 
 use cclab_accel::{
-    active_obligation, paper18_skeleton_marker, Paper18SkeletonCertificate, UFTS001UpstreamBinding,
-    PAPER17_FINAL_CERTIFICATE, PAPER17_FORMAL_ENDPOINT, PAPER17_FROZEN_COMMIT,
+    active_obligation, canonical_ufts002_records, paper18_skeleton_marker,
+    ufts002_finite_candidate_synthesis_record_closed, Paper18SkeletonCertificate,
+    UFTS001UpstreamBinding, PAPER17_FINAL_CERTIFICATE, PAPER17_FORMAL_ENDPOINT,
+    PAPER17_FROZEN_COMMIT,
 };
 
 fn repo_root() -> PathBuf {
@@ -61,6 +63,29 @@ fn initial_skeleton_keeps_paper18_theorem_open() {
 }
 
 #[test]
+fn ufts002_defines_finite_candidate_synthesis_records_without_promotion() {
+    assert!(ufts002_finite_candidate_synthesis_record_closed());
+    let records = canonical_ufts002_records();
+    assert_eq!(records.len(), 1);
+    for record in records {
+        assert!(record.is_bounded_auditable_non_promoting());
+        assert_eq!(
+            record.audit_status_descriptor,
+            "bounded-auditable-nonpromoting"
+        );
+        assert!(record
+            .claim_boundary
+            .all_unified_field_and_physical_success_claims_remain_false());
+    }
+
+    let skeleton = Paper18SkeletonCertificate::after_ufts002();
+    assert!(skeleton.ufts001_upstream_binding_closed);
+    assert!(skeleton.ufts002_finite_candidate_synthesis_record_closed);
+    assert!(!skeleton.ufts003_assumption_dependency_gate_reference_closed);
+    assert!(!skeleton.closes_paper18_theorem());
+}
+
+#[test]
 fn upstream_json_records_paper17_certificate_and_non_uft_boundary() {
     let upstream = read_repo_file("UPSTREAM-PAPERS.json");
     assert!(upstream.contains(PAPER17_FROZEN_COMMIT));
@@ -79,17 +104,17 @@ fn docs_keep_ufts002_active_and_uft_claims_false() {
     let state_md = read_repo_file("GPD/STATE.md");
     let theorem = read_repo_file("docs/unified_field_theory_candidate_synthesis_theorem.md");
 
-    assert_eq!(active_obligation(), "UFTS-002");
-    assert!(state.contains("\"active_obligation\": \"UFTS-002\""));
+    assert_eq!(active_obligation(), "UFTS-003");
+    assert!(state.contains("\"active_obligation\": \"UFTS-003\""));
     assert!(state.contains("\"unified_field_theory_candidate_synthesis_theorem_closed\": false"));
+    assert!(state.contains("\"ufts002_finite_candidate_synthesis_record_closed\": true"));
     assert!(state.contains("\"candidate_synthesis_success_claim\": false"));
     assert!(state.contains("\"unified_field_theory_claim\": false"));
     assert!(state.contains("\"physical_nature_claim\": false"));
     assert!(state.contains("\"physical_validation_claim\": false"));
-    assert!(state_md
-        .contains("The local Paper 18 unified field theory candidate synthesis theorem is not"));
-    assert!(theorem.contains("UFTS-002"));
-    assert!(theorem.contains("no completed unified field theory claim"));
+    assert!(state_md.contains("`UFTS-002` is closed"));
+    assert!(theorem.contains("UFTS-003"));
+    assert!(theorem.contains("no dependency sufficiency or gate success"));
 }
 
 #[test]
