@@ -8,17 +8,17 @@ Paper 18 in the finite-capacity causal-network theorem ladder.
 
 ## Status
 
-Open. `UFTS-001` is closed as an upstream binding to the frozen Paper 17 result.
+Closed. `UFTS-001` is closed as an upstream binding to the frozen Paper 17 result.
 `UFTS-002` is closed as the finite candidate-synthesis record contract.
 `UFTS-003` is closed as the finite assumption, dependency, and gate-reference
 descriptor contract. `UFTS-004` is closed as the finite consistency, conflict,
 and residual-risk descriptor contract. `UFTS-005` is closed as the Paper 17
 compatibility contract. `UFTS-006` is closed as the stability, auditability,
 and rollback contract. `UFTS-007` is closed as the no-hidden-claim audit.
-`UFTS-008` is active.
+`UFTS-008` is closed as the final conditional candidate-synthesis certificate.
 
-The Paper 18 theorem is not closed. This repository does not claim candidate
-synthesis success, a unified field theory, physical nature realization,
+The Paper 18 theorem is closed conditionally. This repository does not claim
+candidate synthesis success, a unified field theory, physical nature realization,
 physical validation, empirical adequacy, physical promotion, or physical
 promotion attempt success.
 
@@ -33,7 +33,8 @@ promotion attempt success.
 
 ## Active Obligation
 
-`UFTS-008`: assemble the final conditional candidate-synthesis certificate.
+No active proof obligation remains. The final certificate is
+`paper18_ufts008_final_conditional_certificate_closes_unified_field_theory_candidate_synthesis_theorem`.
 
 ## Verification
 

@@ -22,6 +22,8 @@ pub const PAPER17_FINAL_CERTIFICATE: &str =
 
 pub const PAPER18_SKELETON_MARKER: &str =
     "paper18-unified-field-theory-candidate-synthesis-ufts001-nonpromoting-skeleton";
+pub const PAPER18_FINAL_CERTIFICATE: &str =
+    "paper18_ufts008_final_conditional_certificate_closes_unified_field_theory_candidate_synthesis_theorem";
 pub const UFTS002_MAX_LABELS_PER_FIELD: usize = 8;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -723,6 +725,43 @@ pub fn ufts007_no_hidden_unified_field_nature_validation_audit_closed() -> bool 
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct Paper18FinalConditionalCertificate {
+    pub certificate_id: &'static str,
+    pub final_certificate_conditional: bool,
+    pub theorem_contract: Paper18SkeletonCertificate,
+    pub claim_boundary: Paper18ClaimBoundary,
+}
+
+impl Paper18FinalConditionalCertificate {
+    pub fn canonical() -> Self {
+        Self {
+            certificate_id: PAPER18_FINAL_CERTIFICATE,
+            final_certificate_conditional: true,
+            theorem_contract: Paper18SkeletonCertificate::final_ufts008(),
+            claim_boundary: Paper18ClaimBoundary::non_promoting(),
+        }
+    }
+
+    pub fn closes_paper18_theorem_conditionally(&self) -> bool {
+        self.certificate_id == PAPER18_FINAL_CERTIFICATE
+            && self.final_certificate_conditional
+            && self.theorem_contract.closes_paper18_theorem()
+            && self
+                .claim_boundary
+                .all_unified_field_and_physical_success_claims_remain_false()
+    }
+}
+
+pub fn paper18_final_conditional_certificate() -> Paper18FinalConditionalCertificate {
+    Paper18FinalConditionalCertificate::canonical()
+}
+
+pub fn ufts008_final_conditional_certificate_closed() -> bool {
+    ufts007_no_hidden_unified_field_nature_validation_audit_closed()
+        && paper18_final_conditional_certificate().closes_paper18_theorem_conditionally()
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Paper18SkeletonCertificate {
     pub ufts001_upstream_binding_closed: bool,
     pub ufts002_finite_candidate_synthesis_record_closed: bool,
@@ -849,6 +888,24 @@ impl Paper18SkeletonCertificate {
         }
     }
 
+    pub fn final_ufts008() -> Self {
+        Self {
+            ufts001_upstream_binding_closed: true,
+            ufts002_finite_candidate_synthesis_record_closed:
+                ufts002_finite_candidate_synthesis_record_closed(),
+            ufts003_assumption_dependency_gate_reference_closed:
+                ufts003_assumption_dependency_gate_reference_closed(),
+            ufts004_consistency_conflict_risk_closed: ufts004_consistency_conflict_risk_closed(),
+            ufts005_paper17_promotion_attempt_compatibility_closed:
+                ufts005_paper17_promotion_attempt_compatibility_closed(),
+            ufts006_stability_audit_rollback_closed: ufts006_stability_audit_rollback_closed(),
+            ufts007_no_hidden_unified_field_nature_validation_audit_closed:
+                ufts007_no_hidden_unified_field_nature_validation_audit_closed(),
+            ufts008_final_conditional_certificate_closed: true,
+            claim_boundary: Paper18ClaimBoundary::non_promoting(),
+        }
+    }
+
     pub fn closes_paper18_theorem(&self) -> bool {
         self.ufts001_upstream_binding_closed
             && self.ufts002_finite_candidate_synthesis_record_closed
@@ -869,7 +926,7 @@ pub fn paper18_skeleton_marker() -> &'static str {
 }
 
 pub fn active_obligation() -> &'static str {
-    "UFTS-008"
+    "COMPLETE"
 }
 
 pub fn is_sha1_hex(value: &str) -> bool {

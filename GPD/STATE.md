@@ -2,7 +2,7 @@
 
 ## Current Status
 
-Paper 18 is open.
+Paper 18 is closed conditionally.
 `UFTS-001` is closed as an upstream-binding scaffold.
 `UFTS-002` is closed as the finite candidate-synthesis record contract through the frozen Paper 17 result.
 `UFTS-003` is closed as the finite assumption, dependency, and gate-reference descriptor contract.
@@ -10,6 +10,7 @@ Paper 18 is open.
 `UFTS-005` is closed as the Paper 17 compatibility contract.
 `UFTS-006` is closed as the stability, auditability, and rollback contract.
 `UFTS-007` is closed as the no-hidden-claim audit.
+`UFTS-008` is closed as the final conditional candidate-synthesis certificate.
 
 - Paper 17 commit:
   `5fa387b8aa40ffce1b930b68f6799c37083e21b2`
@@ -18,8 +19,8 @@ Paper 18 is open.
 - Paper 17 canonical proof:
   `paper17_ppa008_final_conditional_certificate_closes_physical_promotion_attempt_theorem`
 
-The local Paper 18 unified field theory candidate synthesis theorem is not
-closed. Finite candidate synthesis records and finite assumption, dependency,
+The local Paper 18 unified field theory candidate synthesis theorem is closed
+conditionally. Finite candidate synthesis records and finite assumption, dependency,
 and gate-reference descriptors are now defined as bounded, auditable,
 non-promoting interface rows, and finite consistency, conflict, and
 residual-risk descriptors are defined without consistency success or risk
@@ -28,11 +29,12 @@ success, promotion success, validation success, or empirical adequacy.
 Candidate stability, auditability, and rollback behavior are defined without
 empirical stability, falsification success, or physical failure claims. The
 no-hidden unified-field, nature, validation, and promotion import audit is
-closed. The final conditional certificate is not closed yet.
+closed. The final conditional certificate is
+`paper18_ufts008_final_conditional_certificate_closes_unified_field_theory_candidate_synthesis_theorem`.
 
 ## Active Obligation
 
-`UFTS-008`: assemble the final conditional candidate-synthesis certificate.
+None.
 
 ## Closed Obligations
 
@@ -43,6 +45,7 @@ closed. The final conditional certificate is not closed yet.
 - `UFTS-005`: Paper 17 compatibility without promotion attempt success.
 - `UFTS-006`: Candidate stability, auditability, and rollback behavior.
 - `UFTS-007`: No-hidden-claim audit.
+- `UFTS-008`: Final conditional candidate-synthesis certificate.
 
 ## Claim Boundary
 

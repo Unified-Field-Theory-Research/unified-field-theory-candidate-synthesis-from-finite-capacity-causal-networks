@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "paper": 18,
-  "phase": 7,
-  "phase_name": "No Hidden Claim Audit",
-  "active_obligation": "UFTS-008",
+  "phase": 8,
+  "phase_name": "Final Conditional Certificate",
+  "active_obligation": "COMPLETE",
   "closed_obligations": [
     "UFTS-001",
     "UFTS-002",
@@ -11,7 +11,8 @@
     "UFTS-004",
     "UFTS-005",
     "UFTS-006",
-    "UFTS-007"
+    "UFTS-007",
+    "UFTS-008"
   ],
   "upstream_frozen_through_paper17": true,
   "paper17_frozen_commit": "5fa387b8aa40ffce1b930b68f6799c37083e21b2",
@@ -25,8 +26,8 @@
     "ufts005_paper17_promotion_attempt_compatibility_closed": true,
     "ufts006_stability_audit_rollback_closed": true,
     "ufts007_no_hidden_unified_field_nature_validation_audit_closed": true,
-    "ufts008_final_conditional_certificate_closed": false,
-    "unified_field_theory_candidate_synthesis_theorem_closed": false,
+    "ufts008_final_conditional_certificate_closed": true,
+    "unified_field_theory_candidate_synthesis_theorem_closed": true,
     "candidate_synthesis_success_claim": false,
     "unified_field_theory_claim": false,
     "physical_nature_claim": false,
@@ -51,5 +52,6 @@
     "simulation_only_promotion": false,
     "fit_only_calibration_claim": false
   },
-  "next_move": "Close UFTS-008 by assembling the final conditional candidate-synthesis certificate while preserving all non-promotion and non-physical-success claim boundaries."
+  "final_certificate": "paper18_ufts008_final_conditional_certificate_closes_unified_field_theory_candidate_synthesis_theorem",
+  "next_move": "Prepare the self-contained Paper 18 manuscript while preserving all non-promotion and non-physical-success claim boundaries."
 }

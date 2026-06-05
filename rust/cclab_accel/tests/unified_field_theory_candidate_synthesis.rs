@@ -5,13 +5,14 @@ use cclab_accel::{
     active_obligation, canonical_ufts002_records, canonical_ufts003_descriptors,
     canonical_ufts004_descriptors, canonical_ufts005_compatibility_rows,
     canonical_ufts006_rollback_rows, canonical_ufts007_no_hidden_claim_audit_rows,
-    paper18_skeleton_marker, ufts002_finite_candidate_synthesis_record_closed,
+    paper18_final_conditional_certificate, paper18_skeleton_marker,
+    ufts002_finite_candidate_synthesis_record_closed,
     ufts003_assumption_dependency_gate_reference_closed, ufts004_consistency_conflict_risk_closed,
     ufts005_paper17_promotion_attempt_compatibility_closed,
     ufts006_stability_audit_rollback_closed,
     ufts007_no_hidden_unified_field_nature_validation_audit_closed, Paper18SkeletonCertificate,
     UFTS001UpstreamBinding, PAPER17_FINAL_CERTIFICATE, PAPER17_FORMAL_ENDPOINT,
-    PAPER17_FROZEN_COMMIT,
+    PAPER17_FROZEN_COMMIT, PAPER18_FINAL_CERTIFICATE,
 };
 
 fn repo_root() -> PathBuf {
@@ -215,6 +216,18 @@ fn ufts007_closes_no_hidden_claim_audit_without_final_certificate() {
 }
 
 #[test]
+fn ufts008_final_certificate_closes_paper18_conditionally() {
+    let certificate = paper18_final_conditional_certificate();
+    assert_eq!(certificate.certificate_id, PAPER18_FINAL_CERTIFICATE);
+    assert!(certificate.final_certificate_conditional);
+    assert!(certificate.closes_paper18_theorem_conditionally());
+    assert!(certificate.theorem_contract.closes_paper18_theorem());
+    assert!(certificate
+        .claim_boundary
+        .all_unified_field_and_physical_success_claims_remain_false());
+}
+
+#[test]
 fn upstream_json_records_paper17_certificate_and_non_uft_boundary() {
     let upstream = read_repo_file("UPSTREAM-PAPERS.json");
     assert!(upstream.contains(PAPER17_FROZEN_COMMIT));
@@ -233,9 +246,9 @@ fn docs_keep_active_rung_and_uft_claims_false() {
     let state_md = read_repo_file("GPD/STATE.md");
     let theorem = read_repo_file("docs/unified_field_theory_candidate_synthesis_theorem.md");
 
-    assert_eq!(active_obligation(), "UFTS-008");
-    assert!(state.contains("\"active_obligation\": \"UFTS-008\""));
-    assert!(state.contains("\"unified_field_theory_candidate_synthesis_theorem_closed\": false"));
+    assert_eq!(active_obligation(), "COMPLETE");
+    assert!(state.contains("\"active_obligation\": \"COMPLETE\""));
+    assert!(state.contains("\"unified_field_theory_candidate_synthesis_theorem_closed\": true"));
     assert!(state.contains("\"ufts002_finite_candidate_synthesis_record_closed\": true"));
     assert!(state.contains("\"ufts003_assumption_dependency_gate_reference_closed\": true"));
     assert!(state.contains("\"ufts004_consistency_conflict_risk_closed\": true"));
@@ -244,13 +257,14 @@ fn docs_keep_active_rung_and_uft_claims_false() {
     assert!(
         state.contains("\"ufts007_no_hidden_unified_field_nature_validation_audit_closed\": true")
     );
+    assert!(state.contains("\"ufts008_final_conditional_certificate_closed\": true"));
     assert!(state.contains("\"candidate_synthesis_success_claim\": false"));
     assert!(state.contains("\"unified_field_theory_claim\": false"));
     assert!(state.contains("\"physical_nature_claim\": false"));
     assert!(state.contains("\"physical_validation_claim\": false"));
-    assert!(state_md.contains("`UFTS-007` is closed"));
-    assert!(theorem.contains("UFTS-008"));
-    assert!(theorem.contains("final conditional candidate-synthesis certificate"));
+    assert!(state_md.contains("`UFTS-008` is closed"));
+    assert!(theorem.contains("The Paper 18 theorem is closed"));
+    assert!(theorem.contains(PAPER18_FINAL_CERTIFICATE));
 }
 
 #[test]

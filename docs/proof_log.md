@@ -34,3 +34,9 @@
   nature, validation, empirical-adequacy, promotion, simulation-only, and
   fit-only claims.
 - Advanced the active obligation to `UFTS-008`.
+- Closed `UFTS-008` by assembling the final conditional candidate-synthesis
+  certificate:
+  `paper18_ufts008_final_conditional_certificate_closes_unified_field_theory_candidate_synthesis_theorem`.
+- Marked the Paper 18 theorem closed conditionally while preserving all
+  non-promotion, non-validation, non-empirical-adequacy, non-physical-nature,
+  and non-completed-unified-field-theory boundaries.

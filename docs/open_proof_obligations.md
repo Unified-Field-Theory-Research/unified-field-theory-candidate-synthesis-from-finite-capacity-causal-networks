@@ -2,7 +2,7 @@
 
 ## Active
 
-- `UFTS-008`: Assemble the final conditional candidate-synthesis certificate.
+None.
 
 ## Closed
 
@@ -21,6 +21,7 @@
   empirical stability, falsification success, or physical failure claims.
 - `UFTS-007`: No-hidden-unified-field, physical-nature, validation, or
   promotion import audit.
+- `UFTS-008`: Final conditional candidate-synthesis certificate.
 
 ## Claim Boundary
 

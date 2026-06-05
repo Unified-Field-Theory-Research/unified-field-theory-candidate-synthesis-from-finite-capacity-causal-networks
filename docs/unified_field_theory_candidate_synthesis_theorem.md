@@ -28,14 +28,20 @@ physical nature realization, or physical promotion.
   empirical stability, falsification success, or physical failure claims.
 - `UFTS-007`: No-hidden-unified-field, physical-nature, validation, or
   promotion import audit.
+- `UFTS-008`: Final conditional candidate-synthesis certificate:
+  `paper18_ufts008_final_conditional_certificate_closes_unified_field_theory_candidate_synthesis_theorem`.
 
-## Active Rung
+## Status
 
-`UFTS-008`: assemble the final conditional candidate-synthesis certificate.
+The Paper 18 theorem is closed conditionally.
 
-Required boundary for `UFTS-008`:
+The final certificate is:
 
-- every rung `UFTS-001` through `UFTS-007` closed
+`paper18_ufts008_final_conditional_certificate_closes_unified_field_theory_candidate_synthesis_theorem`
+
+Closed boundary:
+
+- every rung `UFTS-001` through `UFTS-008` is closed
 - final certificate remains conditional
 - candidate synthesis success remains unclaimed
 - completed unified field theory remains unclaimed
