@@ -1,12 +1,13 @@
 {
   "schema_version": 1,
   "paper": 18,
-  "phase": 2,
-  "phase_name": "Finite Candidate Synthesis Records",
-  "active_obligation": "UFTS-003",
+  "phase": 3,
+  "phase_name": "Finite Assumption Dependency Gate References",
+  "active_obligation": "UFTS-004",
   "closed_obligations": [
     "UFTS-001",
-    "UFTS-002"
+    "UFTS-002",
+    "UFTS-003"
   ],
   "upstream_frozen_through_paper17": true,
   "paper17_frozen_commit": "5fa387b8aa40ffce1b930b68f6799c37083e21b2",
@@ -15,7 +16,7 @@
   "paper18_claims": {
     "ufts001_upstream_binding_closed": true,
     "ufts002_finite_candidate_synthesis_record_closed": true,
-    "ufts003_assumption_dependency_gate_reference_closed": false,
+    "ufts003_assumption_dependency_gate_reference_closed": true,
     "ufts004_consistency_conflict_risk_closed": false,
     "ufts005_paper17_promotion_attempt_compatibility_closed": false,
     "ufts006_stability_audit_rollback_closed": false,
@@ -46,5 +47,5 @@
     "simulation_only_promotion": false,
     "fit_only_calibration_claim": false
   },
-  "next_move": "Close UFTS-003 by defining finite assumption, dependency, and gate-reference descriptors without dependency sufficiency, gate success, physical validation, empirical adequacy, or promotion success claims."
+  "next_move": "Close UFTS-004 by defining finite synthesis consistency, conflict, and residual-risk descriptors without consistency success, risk discharge, physical validation, empirical adequacy, or promotion success claims."
 }

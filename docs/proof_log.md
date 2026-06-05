@@ -12,3 +12,7 @@
 - Closed `UFTS-002` by adding finite candidate-synthesis record contracts as
   bounded, auditable, non-promoting interface rows in Lean and Rust.
 - Advanced the active obligation to `UFTS-003`.
+- Closed `UFTS-003` by adding finite assumption, dependency, and gate-reference
+  descriptor contracts without assumption discharge, dependency sufficiency, or
+  gate success claims.
+- Advanced the active obligation to `UFTS-004`.

@@ -319,6 +319,100 @@ pub fn ufts002_finite_candidate_synthesis_record_closed() -> bool {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct AssumptionDependencyGateReferenceDescriptor {
+    pub descriptor_id: &'static str,
+    pub assumption_descriptors: &'static [&'static str],
+    pub dependency_descriptors: &'static [&'static str],
+    pub gate_reference_descriptors: &'static [&'static str],
+    pub upstream_reference_labels: &'static [&'static str],
+    pub assumption_discharge_claim: bool,
+    pub dependency_sufficiency_claim: bool,
+    pub gate_success_claim: bool,
+    pub claim_boundary: Paper18ClaimBoundary,
+}
+
+impl AssumptionDependencyGateReferenceDescriptor {
+    pub const fn new(
+        descriptor_id: &'static str,
+        assumption_descriptors: &'static [&'static str],
+        dependency_descriptors: &'static [&'static str],
+        gate_reference_descriptors: &'static [&'static str],
+        upstream_reference_labels: &'static [&'static str],
+    ) -> Self {
+        Self {
+            descriptor_id,
+            assumption_descriptors,
+            dependency_descriptors,
+            gate_reference_descriptors,
+            upstream_reference_labels,
+            assumption_discharge_claim: false,
+            dependency_sufficiency_claim: false,
+            gate_success_claim: false,
+            claim_boundary: Paper18ClaimBoundary::non_promoting(),
+        }
+    }
+
+    pub fn is_finite_auditable_non_sufficient(&self) -> bool {
+        finite_label(self.descriptor_id)
+            && finite_label_set(self.assumption_descriptors)
+            && finite_label_set(self.dependency_descriptors)
+            && finite_label_set(self.gate_reference_descriptors)
+            && finite_label_set(self.upstream_reference_labels)
+            && !self.assumption_discharge_claim
+            && !self.dependency_sufficiency_claim
+            && !self.gate_success_claim
+            && self
+                .claim_boundary
+                .all_unified_field_and_physical_success_claims_remain_false()
+    }
+}
+
+pub const UFTS003_ASSUMPTIONS: [&str; 4] = [
+    "finite-capacity-network-assumption",
+    "network-native-observable-assumption",
+    "paper17-interface-boundary-assumption",
+    "candidate-synthesis-is-interface-assumption",
+];
+pub const UFTS003_DEPENDENCIES: [&str; 4] = [
+    "ufts001-upstream-binding",
+    "ufts002-candidate-records",
+    "paper17-final-conditional-certificate",
+    "paper1-through-paper17-conditional-chain",
+];
+pub const UFTS003_GATE_REFERENCES: [&str; 4] = [
+    "nonpromotion-gate",
+    "no-physical-validation-import-gate",
+    "no-empirical-adequacy-import-gate",
+    "no-uft-completion-import-gate",
+];
+pub const UFTS003_UPSTREAM_REFERENCES: [&str; 3] = [
+    PAPER17_FROZEN_COMMIT,
+    PAPER17_FORMAL_ENDPOINT,
+    PAPER17_FINAL_CERTIFICATE,
+];
+
+pub const CANONICAL_UFTS003_DESCRIPTORS: [AssumptionDependencyGateReferenceDescriptor; 1] =
+    [AssumptionDependencyGateReferenceDescriptor::new(
+        "ufts-assumption-dependency-gate-row-001",
+        &UFTS003_ASSUMPTIONS,
+        &UFTS003_DEPENDENCIES,
+        &UFTS003_GATE_REFERENCES,
+        &UFTS003_UPSTREAM_REFERENCES,
+    )];
+
+pub fn canonical_ufts003_descriptors() -> &'static [AssumptionDependencyGateReferenceDescriptor] {
+    &CANONICAL_UFTS003_DESCRIPTORS
+}
+
+pub fn ufts003_assumption_dependency_gate_reference_closed() -> bool {
+    ufts002_finite_candidate_synthesis_record_closed()
+        && !CANONICAL_UFTS003_DESCRIPTORS.is_empty()
+        && CANONICAL_UFTS003_DESCRIPTORS
+            .iter()
+            .all(AssumptionDependencyGateReferenceDescriptor::is_finite_auditable_non_sufficient)
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Paper18SkeletonCertificate {
     pub ufts001_upstream_binding_closed: bool,
     pub ufts002_finite_candidate_synthesis_record_closed: bool,
@@ -361,6 +455,22 @@ impl Paper18SkeletonCertificate {
         }
     }
 
+    pub fn after_ufts003() -> Self {
+        Self {
+            ufts001_upstream_binding_closed: true,
+            ufts002_finite_candidate_synthesis_record_closed:
+                ufts002_finite_candidate_synthesis_record_closed(),
+            ufts003_assumption_dependency_gate_reference_closed:
+                ufts003_assumption_dependency_gate_reference_closed(),
+            ufts004_consistency_conflict_risk_closed: false,
+            ufts005_paper17_promotion_attempt_compatibility_closed: false,
+            ufts006_stability_audit_rollback_closed: false,
+            ufts007_no_hidden_unified_field_nature_validation_audit_closed: false,
+            ufts008_final_conditional_certificate_closed: false,
+            claim_boundary: Paper18ClaimBoundary::non_promoting(),
+        }
+    }
+
     pub fn closes_paper18_theorem(&self) -> bool {
         self.ufts001_upstream_binding_closed
             && self.ufts002_finite_candidate_synthesis_record_closed
@@ -381,7 +491,7 @@ pub fn paper18_skeleton_marker() -> &'static str {
 }
 
 pub fn active_obligation() -> &'static str {
-    "UFTS-003"
+    "UFTS-004"
 }
 
 pub fn is_sha1_hex(value: &str) -> bool {

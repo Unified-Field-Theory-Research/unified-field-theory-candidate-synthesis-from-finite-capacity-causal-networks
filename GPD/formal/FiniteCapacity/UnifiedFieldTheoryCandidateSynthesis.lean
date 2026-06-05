@@ -129,6 +129,66 @@ theorem ufts002_canonical_finite_candidate_synthesis_record_closed :
   unfold canonicalUFTS002FiniteCandidateSynthesisRecord
   simp
 
+structure UFTS003AssumptionDependencyGateReferenceContract where
+  assumptionDescriptorsFinite : Prop
+  dependencyDescriptorsFinite : Prop
+  gateReferenceDescriptorsFinite : Prop
+  upstreamReferenceLabelsFinite : Prop
+  descriptorRowsBounded : Prop
+  descriptorRowsAuditable : Prop
+  noAssumptionDischargeClaim : Prop
+  noDependencySufficiencyClaim : Prop
+  noGateSuccessClaim : Prop
+  noCandidateSynthesisSuccessClaim : Prop
+  noUnifiedFieldTheoryClaim : Prop
+  noPhysicalPromotionAttemptSuccessClaim : Prop
+  noPhysicalPromotionClaim : Prop
+  noPhysicalValidationClaim : Prop
+  noEmpiricalAdequacyClaim : Prop
+
+def UFTS003AssumptionDependencyGateReferenceContract.closed
+    (c : UFTS003AssumptionDependencyGateReferenceContract) : Prop :=
+  c.assumptionDescriptorsFinite ∧
+  c.dependencyDescriptorsFinite ∧
+  c.gateReferenceDescriptorsFinite ∧
+  c.upstreamReferenceLabelsFinite ∧
+  c.descriptorRowsBounded ∧
+  c.descriptorRowsAuditable ∧
+  c.noAssumptionDischargeClaim ∧
+  c.noDependencySufficiencyClaim ∧
+  c.noGateSuccessClaim ∧
+  c.noCandidateSynthesisSuccessClaim ∧
+  c.noUnifiedFieldTheoryClaim ∧
+  c.noPhysicalPromotionAttemptSuccessClaim ∧
+  c.noPhysicalPromotionClaim ∧
+  c.noPhysicalValidationClaim ∧
+  c.noEmpiricalAdequacyClaim
+
+def canonicalUFTS003AssumptionDependencyGateReference :
+    UFTS003AssumptionDependencyGateReferenceContract :=
+  { assumptionDescriptorsFinite := True,
+    dependencyDescriptorsFinite := True,
+    gateReferenceDescriptorsFinite := True,
+    upstreamReferenceLabelsFinite := True,
+    descriptorRowsBounded := True,
+    descriptorRowsAuditable := True,
+    noAssumptionDischargeClaim := True,
+    noDependencySufficiencyClaim := True,
+    noGateSuccessClaim := True,
+    noCandidateSynthesisSuccessClaim := True,
+    noUnifiedFieldTheoryClaim := True,
+    noPhysicalPromotionAttemptSuccessClaim := True,
+    noPhysicalPromotionClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True }
+
+theorem ufts003_canonical_assumption_dependency_gate_reference_closed :
+    UFTS003AssumptionDependencyGateReferenceContract.closed
+      canonicalUFTS003AssumptionDependencyGateReference := by
+  unfold UFTS003AssumptionDependencyGateReferenceContract.closed
+  unfold canonicalUFTS003AssumptionDependencyGateReference
+  simp
+
 structure Paper18UnifiedFieldTheoryCandidateSynthesisTheoremContract where
   ufts001UpstreamBindingClosed : Prop
   ufts002FiniteCandidateSynthesisRecordClosed : Prop
@@ -223,5 +283,41 @@ theorem paper18_ufts002_skeleton_does_not_close_unified_field_theory_candidate_s
     canonicalUFTS001UpstreamBinding,
     UFTS002FiniteCandidateSynthesisRecordContract.closed,
     canonicalUFTS002FiniteCandidateSynthesisRecord]
+
+def paper18UFTS003SkeletonContract :
+    Paper18UnifiedFieldTheoryCandidateSynthesisTheoremContract :=
+  { ufts001UpstreamBindingClosed :=
+      UFTS001UpstreamBindingContract.closed
+        canonicalUFTS001UpstreamBinding,
+    ufts002FiniteCandidateSynthesisRecordClosed :=
+      UFTS002FiniteCandidateSynthesisRecordContract.closed
+        canonicalUFTS002FiniteCandidateSynthesisRecord,
+    ufts003AssumptionDependencyGateReferenceClosed :=
+      UFTS003AssumptionDependencyGateReferenceContract.closed
+        canonicalUFTS003AssumptionDependencyGateReference,
+    ufts004ConsistencyConflictRiskClosed := False,
+    ufts005Paper17PromotionAttemptCompatibilityClosed := False,
+    ufts006StabilityAuditRollbackClosed := False,
+    ufts007NoHiddenUnifiedFieldNatureValidationAuditClosed := False,
+    ufts008FinalConditionalCertificateClosed := False,
+    noCandidateSynthesisSuccessClaim := True,
+    noUnifiedFieldTheoryClaim := True,
+    noPhysicalNatureClaim := True,
+    noPhysicalPromotionAttemptSuccessClaim := True,
+    noPhysicalPromotionClaim := True,
+    noPhysicalValidationClaim := True,
+    noEmpiricalAdequacyClaim := True }
+
+theorem paper18_ufts003_skeleton_does_not_close_unified_field_theory_candidate_synthesis_theorem :
+    ¬ Paper18UnifiedFieldTheoryCandidateSynthesisTheoremContract.closed
+      paper18UFTS003SkeletonContract := by
+  unfold Paper18UnifiedFieldTheoryCandidateSynthesisTheoremContract.closed
+  unfold paper18UFTS003SkeletonContract
+  simp [UFTS001UpstreamBindingContract.closed,
+    canonicalUFTS001UpstreamBinding,
+    UFTS002FiniteCandidateSynthesisRecordContract.closed,
+    canonicalUFTS002FiniteCandidateSynthesisRecord,
+    UFTS003AssumptionDependencyGateReferenceContract.closed,
+    canonicalUFTS003AssumptionDependencyGateReference]
 
 end FiniteCapacity

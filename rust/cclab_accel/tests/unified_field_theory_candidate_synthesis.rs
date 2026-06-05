@@ -2,8 +2,9 @@ use std::fs;
 use std::path::{Path, PathBuf};
 
 use cclab_accel::{
-    active_obligation, canonical_ufts002_records, paper18_skeleton_marker,
-    ufts002_finite_candidate_synthesis_record_closed, Paper18SkeletonCertificate,
+    active_obligation, canonical_ufts002_records, canonical_ufts003_descriptors,
+    paper18_skeleton_marker, ufts002_finite_candidate_synthesis_record_closed,
+    ufts003_assumption_dependency_gate_reference_closed, Paper18SkeletonCertificate,
     UFTS001UpstreamBinding, PAPER17_FINAL_CERTIFICATE, PAPER17_FORMAL_ENDPOINT,
     PAPER17_FROZEN_COMMIT,
 };
@@ -86,6 +87,34 @@ fn ufts002_defines_finite_candidate_synthesis_records_without_promotion() {
 }
 
 #[test]
+fn ufts003_defines_dependency_and_gate_descriptors_without_success() {
+    assert!(ufts003_assumption_dependency_gate_reference_closed());
+    let descriptors = canonical_ufts003_descriptors();
+    assert_eq!(descriptors.len(), 1);
+    for descriptor in descriptors {
+        assert!(descriptor.is_finite_auditable_non_sufficient());
+        assert!(!descriptor.assumption_discharge_claim);
+        assert!(!descriptor.dependency_sufficiency_claim);
+        assert!(!descriptor.gate_success_claim);
+        assert!(descriptor
+            .upstream_reference_labels
+            .contains(&PAPER17_FROZEN_COMMIT));
+        assert!(descriptor
+            .upstream_reference_labels
+            .contains(&PAPER17_FORMAL_ENDPOINT));
+        assert!(descriptor
+            .upstream_reference_labels
+            .contains(&PAPER17_FINAL_CERTIFICATE));
+    }
+
+    let skeleton = Paper18SkeletonCertificate::after_ufts003();
+    assert!(skeleton.ufts002_finite_candidate_synthesis_record_closed);
+    assert!(skeleton.ufts003_assumption_dependency_gate_reference_closed);
+    assert!(!skeleton.ufts004_consistency_conflict_risk_closed);
+    assert!(!skeleton.closes_paper18_theorem());
+}
+
+#[test]
 fn upstream_json_records_paper17_certificate_and_non_uft_boundary() {
     let upstream = read_repo_file("UPSTREAM-PAPERS.json");
     assert!(upstream.contains(PAPER17_FROZEN_COMMIT));
@@ -99,22 +128,23 @@ fn upstream_json_records_paper17_certificate_and_non_uft_boundary() {
 }
 
 #[test]
-fn docs_keep_ufts002_active_and_uft_claims_false() {
+fn docs_keep_active_rung_and_uft_claims_false() {
     let state = read_repo_file("GPD/state.json");
     let state_md = read_repo_file("GPD/STATE.md");
     let theorem = read_repo_file("docs/unified_field_theory_candidate_synthesis_theorem.md");
 
-    assert_eq!(active_obligation(), "UFTS-003");
-    assert!(state.contains("\"active_obligation\": \"UFTS-003\""));
+    assert_eq!(active_obligation(), "UFTS-004");
+    assert!(state.contains("\"active_obligation\": \"UFTS-004\""));
     assert!(state.contains("\"unified_field_theory_candidate_synthesis_theorem_closed\": false"));
     assert!(state.contains("\"ufts002_finite_candidate_synthesis_record_closed\": true"));
+    assert!(state.contains("\"ufts003_assumption_dependency_gate_reference_closed\": true"));
     assert!(state.contains("\"candidate_synthesis_success_claim\": false"));
     assert!(state.contains("\"unified_field_theory_claim\": false"));
     assert!(state.contains("\"physical_nature_claim\": false"));
     assert!(state.contains("\"physical_validation_claim\": false"));
-    assert!(state_md.contains("`UFTS-002` is closed"));
-    assert!(theorem.contains("UFTS-003"));
-    assert!(theorem.contains("no dependency sufficiency or gate success"));
+    assert!(state_md.contains("`UFTS-003` is closed"));
+    assert!(theorem.contains("UFTS-004"));
+    assert!(theorem.contains("without consistency success or risk discharge"));
 }
 
 #[test]
