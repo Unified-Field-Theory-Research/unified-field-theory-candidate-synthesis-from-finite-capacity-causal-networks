@@ -5,7 +5,8 @@
 Paper 18 is open. `UFTS-001` is closed as an upstream-binding scaffold.
 `UFTS-002` is closed as the finite candidate-synthesis record contract through
 the frozen Paper 17 result. `UFTS-003` is closed as the finite assumption,
-dependency, and gate-reference descriptor contract:
+dependency, and gate-reference descriptor contract. `UFTS-004` is closed as
+the finite consistency, conflict, and residual-risk descriptor contract:
 
 - Paper 17 commit:
   `5fa387b8aa40ffce1b930b68f6799c37083e21b2`
@@ -17,19 +18,22 @@ dependency, and gate-reference descriptor contract:
 The local Paper 18 unified field theory candidate synthesis theorem is not
 closed. Finite candidate synthesis records and finite assumption, dependency,
 and gate-reference descriptors are now defined as bounded, auditable,
-non-promoting interface rows, but consistency, conflict, and residual-risk
-descriptors are not closed yet.
+non-promoting interface rows, and finite consistency, conflict, and
+residual-risk descriptors are defined without consistency success or risk
+discharge. Paper 17 compatibility rows are not closed yet.
 
 ## Active Obligation
 
-`UFTS-004`: define finite synthesis consistency, conflict, and residual-risk
-descriptors without consistency success or risk discharge.
+`UFTS-005`: define Paper 17 physical-promotion-attempt compatibility rows
+without promotion attempt success, promotion success, validation success, or
+empirical adequacy.
 
 ## Closed Obligations
 
 - `UFTS-001`: Upstream binding and claim-boundary scaffold.
 - `UFTS-002`: Finite candidate synthesis records.
 - `UFTS-003`: Finite assumption, dependency, and gate-reference descriptors.
+- `UFTS-004`: Finite consistency, conflict, and residual-risk descriptors.
 
 ## Claim Boundary
 

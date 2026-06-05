@@ -11,7 +11,8 @@ Paper 18 in the finite-capacity causal-network theorem ladder.
 Open. `UFTS-001` is closed as an upstream binding to the frozen Paper 17 result.
 `UFTS-002` is closed as the finite candidate-synthesis record contract.
 `UFTS-003` is closed as the finite assumption, dependency, and gate-reference
-descriptor contract. `UFTS-004` is active.
+descriptor contract. `UFTS-004` is closed as the finite consistency, conflict,
+and residual-risk descriptor contract. `UFTS-005` is active.
 
 The Paper 18 theorem is not closed. This repository does not claim candidate
 synthesis success, a unified field theory, physical nature realization,
@@ -29,8 +30,9 @@ promotion attempt success.
 
 ## Active Obligation
 
-`UFTS-004`: define finite synthesis consistency, conflict, and residual-risk
-descriptors without consistency success or risk discharge.
+`UFTS-005`: define Paper 17 physical-promotion-attempt compatibility rows
+without promotion attempt success, promotion success, validation success, or
+empirical adequacy.
 
 ## Verification
 

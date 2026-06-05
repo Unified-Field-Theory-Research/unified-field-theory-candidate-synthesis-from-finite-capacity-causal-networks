@@ -8,17 +8,17 @@
   bounded, auditable, non-promoting interface rows.
 - `UFTS-003`: Finite assumption, dependency, and gate-reference descriptors
   without dependency sufficiency or gate success.
-
-## Active
-
-- `UFTS-004`: Define finite synthesis consistency, conflict, and residual-risk
+- `UFTS-004`: Finite synthesis consistency, conflict, and residual-risk
   descriptors without consistency success or risk discharge.
 
-## Planned
+## Active
 
 - `UFTS-005`: Define Paper 17 physical-promotion-attempt compatibility rows
   without promotion attempt success, promotion success, validation success, or
   empirical adequacy.
+
+## Planned
+
 - `UFTS-006`: Define candidate stability, auditability, and rollback behavior
   without empirical stability, falsification success, or physical failure
   claims.

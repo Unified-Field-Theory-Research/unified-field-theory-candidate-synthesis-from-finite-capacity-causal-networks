@@ -16,3 +16,7 @@
   descriptor contracts without assumption discharge, dependency sufficiency, or
   gate success claims.
 - Advanced the active obligation to `UFTS-004`.
+- Closed `UFTS-004` by adding finite consistency-check, conflict-row,
+  residual-risk, and unresolved-status descriptor contracts without consistency
+  success, conflict-resolution success, or risk-discharge claims.
+- Advanced the active obligation to `UFTS-005`.

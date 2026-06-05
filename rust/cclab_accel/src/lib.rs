@@ -413,6 +413,96 @@ pub fn ufts003_assumption_dependency_gate_reference_closed() -> bool {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct ConsistencyConflictResidualRiskDescriptor {
+    pub descriptor_id: &'static str,
+    pub consistency_check_descriptors: &'static [&'static str],
+    pub conflict_rows: &'static [&'static str],
+    pub residual_risk_rows: &'static [&'static str],
+    pub unresolved_status_labels: &'static [&'static str],
+    pub consistency_success_claim: bool,
+    pub conflict_resolution_success_claim: bool,
+    pub risk_discharge_claim: bool,
+    pub claim_boundary: Paper18ClaimBoundary,
+}
+
+impl ConsistencyConflictResidualRiskDescriptor {
+    pub const fn new(
+        descriptor_id: &'static str,
+        consistency_check_descriptors: &'static [&'static str],
+        conflict_rows: &'static [&'static str],
+        residual_risk_rows: &'static [&'static str],
+        unresolved_status_labels: &'static [&'static str],
+    ) -> Self {
+        Self {
+            descriptor_id,
+            consistency_check_descriptors,
+            conflict_rows,
+            residual_risk_rows,
+            unresolved_status_labels,
+            consistency_success_claim: false,
+            conflict_resolution_success_claim: false,
+            risk_discharge_claim: false,
+            claim_boundary: Paper18ClaimBoundary::non_promoting(),
+        }
+    }
+
+    pub fn is_finite_unresolved_non_successful(&self) -> bool {
+        finite_label(self.descriptor_id)
+            && finite_label_set(self.consistency_check_descriptors)
+            && finite_label_set(self.conflict_rows)
+            && finite_label_set(self.residual_risk_rows)
+            && finite_label_set(self.unresolved_status_labels)
+            && !self.consistency_success_claim
+            && !self.conflict_resolution_success_claim
+            && !self.risk_discharge_claim
+            && self
+                .claim_boundary
+                .all_unified_field_and_physical_success_claims_remain_false()
+    }
+}
+
+pub const UFTS004_CONSISTENCY_CHECKS: [&str; 4] = [
+    "candidate-record-shape-check",
+    "upstream-reference-presence-check",
+    "claim-boundary-preservation-check",
+    "rollback-addressability-check",
+];
+pub const UFTS004_CONFLICT_ROWS: [&str; 4] = [
+    "unresolved-cross-paper-interface-conflict",
+    "unresolved-observable-scope-conflict",
+    "unresolved-validation-category-conflict",
+    "unresolved-uft-completion-category-conflict",
+];
+pub const UFTS004_RESIDUAL_RISK_ROWS: [&str; 4] = [
+    "residual-risk-category-error",
+    "residual-risk-hidden-promotion",
+    "residual-risk-fit-only-shortcut",
+    "residual-risk-simulation-only-shortcut",
+];
+pub const UFTS004_UNRESOLVED_STATUS_LABELS: [&str; 3] = ["open", "bounded", "non-discharged"];
+
+pub const CANONICAL_UFTS004_DESCRIPTORS: [ConsistencyConflictResidualRiskDescriptor; 1] =
+    [ConsistencyConflictResidualRiskDescriptor::new(
+        "ufts-consistency-conflict-risk-row-001",
+        &UFTS004_CONSISTENCY_CHECKS,
+        &UFTS004_CONFLICT_ROWS,
+        &UFTS004_RESIDUAL_RISK_ROWS,
+        &UFTS004_UNRESOLVED_STATUS_LABELS,
+    )];
+
+pub fn canonical_ufts004_descriptors() -> &'static [ConsistencyConflictResidualRiskDescriptor] {
+    &CANONICAL_UFTS004_DESCRIPTORS
+}
+
+pub fn ufts004_consistency_conflict_risk_closed() -> bool {
+    ufts003_assumption_dependency_gate_reference_closed()
+        && !CANONICAL_UFTS004_DESCRIPTORS.is_empty()
+        && CANONICAL_UFTS004_DESCRIPTORS
+            .iter()
+            .all(ConsistencyConflictResidualRiskDescriptor::is_finite_unresolved_non_successful)
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Paper18SkeletonCertificate {
     pub ufts001_upstream_binding_closed: bool,
     pub ufts002_finite_candidate_synthesis_record_closed: bool,
@@ -471,6 +561,22 @@ impl Paper18SkeletonCertificate {
         }
     }
 
+    pub fn after_ufts004() -> Self {
+        Self {
+            ufts001_upstream_binding_closed: true,
+            ufts002_finite_candidate_synthesis_record_closed:
+                ufts002_finite_candidate_synthesis_record_closed(),
+            ufts003_assumption_dependency_gate_reference_closed:
+                ufts003_assumption_dependency_gate_reference_closed(),
+            ufts004_consistency_conflict_risk_closed: ufts004_consistency_conflict_risk_closed(),
+            ufts005_paper17_promotion_attempt_compatibility_closed: false,
+            ufts006_stability_audit_rollback_closed: false,
+            ufts007_no_hidden_unified_field_nature_validation_audit_closed: false,
+            ufts008_final_conditional_certificate_closed: false,
+            claim_boundary: Paper18ClaimBoundary::non_promoting(),
+        }
+    }
+
     pub fn closes_paper18_theorem(&self) -> bool {
         self.ufts001_upstream_binding_closed
             && self.ufts002_finite_candidate_synthesis_record_closed
@@ -491,7 +597,7 @@ pub fn paper18_skeleton_marker() -> &'static str {
 }
 
 pub fn active_obligation() -> &'static str {
-    "UFTS-004"
+    "UFTS-005"
 }
 
 pub fn is_sha1_hex(value: &str) -> bool {

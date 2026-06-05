@@ -20,25 +20,27 @@ physical nature realization, or physical promotion.
   bounded, auditable, non-promoting interface rows.
 - `UFTS-003`: Finite assumption, dependency, and gate-reference descriptors
   without dependency sufficiency or gate success.
+- `UFTS-004`: Finite synthesis consistency, conflict, and residual-risk
+  descriptors without consistency success or risk discharge.
 
 ## Active Rung
 
-`UFTS-004`: define finite synthesis consistency, conflict, and residual-risk
-descriptors without consistency success or risk discharge.
+`UFTS-005`: define Paper 17 physical-promotion-attempt compatibility rows
+without promotion attempt success, promotion success, validation success, or
+empirical adequacy.
 
-Required boundary for `UFTS-004`:
+Required boundary for `UFTS-005`:
 
-- finite consistency-check descriptors
-- finite conflict rows
-- finite residual-risk rows
-- explicit unresolved-status labels
-- no consistency success
-- no risk discharge or conflict resolution success
-- no physical validation, empirical adequacy, or promotion success
+- frozen Paper 17 commit reference
+- frozen Paper 17 formal endpoint reference
+- frozen Paper 17 final certificate reference
+- explicit compatibility-scope labels
+- no physical promotion attempt success
+- no physical promotion, validation, or empirical adequacy
+- no completed unified field theory or physical nature claim
 
 ## Planned Rungs
 
-- `UFTS-005`: Paper 17 compatibility without promotion attempt success.
 - `UFTS-006`: candidate stability, auditability, and rollback behavior.
 - `UFTS-007`: no-hidden-unified-field, nature, validation, or promotion audit.
 - `UFTS-008`: final conditional candidate-synthesis certificate.
