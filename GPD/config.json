@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "paper": 18,
+  "short_code": "UFTS",
+  "title": "Unified Field Theory Candidate Synthesis From Finite-Capacity Causal Networks",
+  "active_obligation": "UFTS-002",
+  "formal_module": "FiniteCapacity.UnifiedFieldTheoryCandidateSynthesis",
+  "rust_test": "unified_field_theory_candidate_synthesis",
+  "claim_boundary": {
+    "candidate_synthesis_success_claim": false,
+    "unified_field_theory_claim": false,
+    "physical_nature_claim": false,
+    "physical_promotion_attempt_success_claim": false,
+    "physical_promotion_claim": false,
+    "physical_validation_claim": false,
+    "empirical_adequacy_claim": false
+  }
+}

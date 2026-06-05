@@ -1,0 +1,35 @@
+# Paper 18 Roadmap
+
+## Closed
+
+- `UFTS-001`: Upstream binding and claim-boundary scaffold through the frozen
+  Paper 17 final conditional certificate.
+
+## Active
+
+- `UFTS-002`: Define finite unified-field-theory candidate synthesis records as
+  bounded, auditable, non-promoting interface rows.
+
+## Planned
+
+- `UFTS-003`: Define finite assumption, dependency, and gate-reference
+  descriptors without dependency sufficiency or gate success.
+- `UFTS-004`: Define finite synthesis consistency, conflict, and residual-risk
+  descriptors without consistency success or risk discharge.
+- `UFTS-005`: Define Paper 17 physical-promotion-attempt compatibility rows
+  without promotion attempt success, promotion success, validation success, or
+  empirical adequacy.
+- `UFTS-006`: Define candidate stability, auditability, and rollback behavior
+  without empirical stability, falsification success, or physical failure
+  claims.
+- `UFTS-007`: Close a no-hidden-unified-field, physical-nature, validation, or
+  promotion import audit.
+- `UFTS-008`: Assemble the final conditional candidate-synthesis certificate.
+
+## Non-Goals
+
+- No completed unified field theory claim.
+- No physical proof that nature uses finite-capacity causal networks.
+- No physical validation, empirical adequacy, promotion success, review
+  acceptance, reproduction success, benchmark success, prediction success, or
+  falsification success.

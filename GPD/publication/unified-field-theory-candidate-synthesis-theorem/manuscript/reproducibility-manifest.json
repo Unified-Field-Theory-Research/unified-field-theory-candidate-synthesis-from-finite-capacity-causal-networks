@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "paper": 18,
+  "checks": [
+    "make test-fast",
+    "make lean-build"
+  ],
+  "formal_module": "FiniteCapacity.UnifiedFieldTheoryCandidateSynthesis",
+  "formal_endpoint": "Paper18UnifiedFieldTheoryCandidateSynthesisTheoremContract.closed",
+  "rust_test": "rust/cclab_accel/tests/unified_field_theory_candidate_synthesis.rs",
+  "non_promotion_boundary_required": true,
+  "theorem_closed": false
+}

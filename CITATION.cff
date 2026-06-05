@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this repository, cite it as an AI-assisted research artifact."
+title: "Unified Field Theory Candidate Synthesis From Finite-Capacity Causal Networks"
+authors:
+  - family-names: "Greenman"
+    given-names: "Abraham"
+repository-code: "https://github.com/Unified-Field-Theory-Research/unified-field-theory-candidate-synthesis-from-finite-capacity-causal-networks"
+version: "0.1.0"
+license: "MIT"
