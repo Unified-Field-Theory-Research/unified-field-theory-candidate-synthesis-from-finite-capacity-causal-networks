@@ -10,18 +10,18 @@
   without dependency sufficiency or gate success.
 - `UFTS-004`: Finite synthesis consistency, conflict, and residual-risk
   descriptors without consistency success or risk discharge.
+- `UFTS-005`: Paper 17 physical-promotion-attempt compatibility rows without
+  promotion attempt success, promotion success, validation success, or empirical
+  adequacy.
 
 ## Active
-
-- `UFTS-005`: Define Paper 17 physical-promotion-attempt compatibility rows
-  without promotion attempt success, promotion success, validation success, or
-  empirical adequacy.
-
-## Planned
 
 - `UFTS-006`: Define candidate stability, auditability, and rollback behavior
   without empirical stability, falsification success, or physical failure
   claims.
+
+## Planned
+
 - `UFTS-007`: Close a no-hidden-unified-field, physical-nature, validation, or
   promotion import audit.
 - `UFTS-008`: Assemble the final conditional candidate-synthesis certificate.

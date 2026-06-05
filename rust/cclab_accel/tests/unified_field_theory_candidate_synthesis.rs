@@ -3,11 +3,12 @@ use std::path::{Path, PathBuf};
 
 use cclab_accel::{
     active_obligation, canonical_ufts002_records, canonical_ufts003_descriptors,
-    canonical_ufts004_descriptors, paper18_skeleton_marker,
+    canonical_ufts004_descriptors, canonical_ufts005_compatibility_rows, paper18_skeleton_marker,
     ufts002_finite_candidate_synthesis_record_closed,
     ufts003_assumption_dependency_gate_reference_closed, ufts004_consistency_conflict_risk_closed,
-    Paper18SkeletonCertificate, UFTS001UpstreamBinding, PAPER17_FINAL_CERTIFICATE,
-    PAPER17_FORMAL_ENDPOINT, PAPER17_FROZEN_COMMIT,
+    ufts005_paper17_promotion_attempt_compatibility_closed, Paper18SkeletonCertificate,
+    UFTS001UpstreamBinding, PAPER17_FINAL_CERTIFICATE, PAPER17_FORMAL_ENDPOINT,
+    PAPER17_FROZEN_COMMIT,
 };
 
 fn repo_root() -> PathBuf {
@@ -139,6 +140,29 @@ fn ufts004_defines_conflict_and_risk_rows_without_discharge() {
 }
 
 #[test]
+fn ufts005_keeps_paper17_compatibility_non_promoting() {
+    assert!(ufts005_paper17_promotion_attempt_compatibility_closed());
+    let rows = canonical_ufts005_compatibility_rows();
+    assert_eq!(rows.len(), 1);
+    for row in rows {
+        assert!(row.is_paper17_compatible_without_promotion_success());
+        assert_eq!(row.paper17_frozen_commit, PAPER17_FROZEN_COMMIT);
+        assert_eq!(row.paper17_formal_endpoint, PAPER17_FORMAL_ENDPOINT);
+        assert_eq!(row.paper17_final_certificate, PAPER17_FINAL_CERTIFICATE);
+        assert!(!row.physical_promotion_attempt_success_claim);
+        assert!(!row.physical_promotion_claim);
+        assert!(!row.physical_validation_claim);
+        assert!(!row.empirical_adequacy_claim);
+    }
+
+    let skeleton = Paper18SkeletonCertificate::after_ufts005();
+    assert!(skeleton.ufts004_consistency_conflict_risk_closed);
+    assert!(skeleton.ufts005_paper17_promotion_attempt_compatibility_closed);
+    assert!(!skeleton.ufts006_stability_audit_rollback_closed);
+    assert!(!skeleton.closes_paper18_theorem());
+}
+
+#[test]
 fn upstream_json_records_paper17_certificate_and_non_uft_boundary() {
     let upstream = read_repo_file("UPSTREAM-PAPERS.json");
     assert!(upstream.contains(PAPER17_FROZEN_COMMIT));
@@ -157,19 +181,20 @@ fn docs_keep_active_rung_and_uft_claims_false() {
     let state_md = read_repo_file("GPD/STATE.md");
     let theorem = read_repo_file("docs/unified_field_theory_candidate_synthesis_theorem.md");
 
-    assert_eq!(active_obligation(), "UFTS-005");
-    assert!(state.contains("\"active_obligation\": \"UFTS-005\""));
+    assert_eq!(active_obligation(), "UFTS-006");
+    assert!(state.contains("\"active_obligation\": \"UFTS-006\""));
     assert!(state.contains("\"unified_field_theory_candidate_synthesis_theorem_closed\": false"));
     assert!(state.contains("\"ufts002_finite_candidate_synthesis_record_closed\": true"));
     assert!(state.contains("\"ufts003_assumption_dependency_gate_reference_closed\": true"));
     assert!(state.contains("\"ufts004_consistency_conflict_risk_closed\": true"));
+    assert!(state.contains("\"ufts005_paper17_promotion_attempt_compatibility_closed\": true"));
     assert!(state.contains("\"candidate_synthesis_success_claim\": false"));
     assert!(state.contains("\"unified_field_theory_claim\": false"));
     assert!(state.contains("\"physical_nature_claim\": false"));
     assert!(state.contains("\"physical_validation_claim\": false"));
-    assert!(state_md.contains("`UFTS-004` is closed"));
-    assert!(theorem.contains("UFTS-005"));
-    assert!(theorem.contains("without promotion attempt success"));
+    assert!(state_md.contains("`UFTS-005` is closed"));
+    assert!(theorem.contains("UFTS-006"));
+    assert!(theorem.contains("without empirical stability"));
 }
 
 #[test]

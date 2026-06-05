@@ -2,9 +2,9 @@
 
 ## Active
 
-- `UFTS-005`: Define Paper 17 physical-promotion-attempt compatibility rows
-  without promotion attempt success, promotion success, validation success, or
-  empirical adequacy.
+- `UFTS-006`: Define candidate stability, auditability, and rollback behavior
+  without empirical stability, falsification success, or physical failure
+  claims.
 
 ## Closed
 
@@ -16,6 +16,9 @@
   without dependency sufficiency or gate success.
 - `UFTS-004`: Finite synthesis consistency, conflict, and residual-risk
   descriptors without consistency success or risk discharge.
+- `UFTS-005`: Paper 17 physical-promotion-attempt compatibility rows without
+  promotion attempt success, promotion success, validation success, or empirical
+  adequacy.
 
 ## Claim Boundary
 

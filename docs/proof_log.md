@@ -20,3 +20,8 @@
   residual-risk, and unresolved-status descriptor contracts without consistency
   success, conflict-resolution success, or risk-discharge claims.
 - Advanced the active obligation to `UFTS-005`.
+- Closed `UFTS-005` by adding Paper 17 physical-promotion-attempt compatibility
+  rows pinned to the frozen commit, endpoint, and certificate without importing
+  promotion attempt success, promotion success, validation success, or empirical
+  adequacy.
+- Advanced the active obligation to `UFTS-006`.

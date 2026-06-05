@@ -503,6 +503,76 @@ pub fn ufts004_consistency_conflict_risk_closed() -> bool {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct Paper17PromotionAttemptCompatibilityRow {
+    pub row_id: &'static str,
+    pub paper17_frozen_commit: &'static str,
+    pub paper17_formal_endpoint: &'static str,
+    pub paper17_final_certificate: &'static str,
+    pub compatibility_scope_labels: &'static [&'static str],
+    pub physical_promotion_attempt_success_claim: bool,
+    pub physical_promotion_claim: bool,
+    pub physical_validation_claim: bool,
+    pub empirical_adequacy_claim: bool,
+    pub claim_boundary: Paper18ClaimBoundary,
+}
+
+impl Paper17PromotionAttemptCompatibilityRow {
+    pub const fn canonical() -> Self {
+        Self {
+            row_id: "ufts-paper17-compatibility-row-001",
+            paper17_frozen_commit: PAPER17_FROZEN_COMMIT,
+            paper17_formal_endpoint: PAPER17_FORMAL_ENDPOINT,
+            paper17_final_certificate: PAPER17_FINAL_CERTIFICATE,
+            compatibility_scope_labels: &UFTS005_COMPATIBILITY_SCOPE_LABELS,
+            physical_promotion_attempt_success_claim: false,
+            physical_promotion_claim: false,
+            physical_validation_claim: false,
+            empirical_adequacy_claim: false,
+            claim_boundary: Paper18ClaimBoundary::non_promoting(),
+        }
+    }
+
+    pub fn is_paper17_compatible_without_promotion_success(&self) -> bool {
+        finite_label(self.row_id)
+            && is_sha1_hex(self.paper17_frozen_commit)
+            && self.paper17_frozen_commit == PAPER17_FROZEN_COMMIT
+            && self.paper17_formal_endpoint == PAPER17_FORMAL_ENDPOINT
+            && self.paper17_final_certificate == PAPER17_FINAL_CERTIFICATE
+            && finite_label_set(self.compatibility_scope_labels)
+            && !self.physical_promotion_attempt_success_claim
+            && !self.physical_promotion_claim
+            && !self.physical_validation_claim
+            && !self.empirical_adequacy_claim
+            && self
+                .claim_boundary
+                .all_unified_field_and_physical_success_claims_remain_false()
+    }
+}
+
+pub const UFTS005_COMPATIBILITY_SCOPE_LABELS: [&str; 4] = [
+    "paper17-conditional-interface-only",
+    "no-promotion-attempt-success-import",
+    "no-physical-validation-import",
+    "no-empirical-adequacy-import",
+];
+
+pub const CANONICAL_UFTS005_COMPATIBILITY_ROWS: [Paper17PromotionAttemptCompatibilityRow; 1] =
+    [Paper17PromotionAttemptCompatibilityRow::canonical()];
+
+pub fn canonical_ufts005_compatibility_rows() -> &'static [Paper17PromotionAttemptCompatibilityRow]
+{
+    &CANONICAL_UFTS005_COMPATIBILITY_ROWS
+}
+
+pub fn ufts005_paper17_promotion_attempt_compatibility_closed() -> bool {
+    ufts004_consistency_conflict_risk_closed()
+        && !CANONICAL_UFTS005_COMPATIBILITY_ROWS.is_empty()
+        && CANONICAL_UFTS005_COMPATIBILITY_ROWS
+            .iter()
+            .all(Paper17PromotionAttemptCompatibilityRow::is_paper17_compatible_without_promotion_success)
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Paper18SkeletonCertificate {
     pub ufts001_upstream_binding_closed: bool,
     pub ufts002_finite_candidate_synthesis_record_closed: bool,
@@ -577,6 +647,23 @@ impl Paper18SkeletonCertificate {
         }
     }
 
+    pub fn after_ufts005() -> Self {
+        Self {
+            ufts001_upstream_binding_closed: true,
+            ufts002_finite_candidate_synthesis_record_closed:
+                ufts002_finite_candidate_synthesis_record_closed(),
+            ufts003_assumption_dependency_gate_reference_closed:
+                ufts003_assumption_dependency_gate_reference_closed(),
+            ufts004_consistency_conflict_risk_closed: ufts004_consistency_conflict_risk_closed(),
+            ufts005_paper17_promotion_attempt_compatibility_closed:
+                ufts005_paper17_promotion_attempt_compatibility_closed(),
+            ufts006_stability_audit_rollback_closed: false,
+            ufts007_no_hidden_unified_field_nature_validation_audit_closed: false,
+            ufts008_final_conditional_certificate_closed: false,
+            claim_boundary: Paper18ClaimBoundary::non_promoting(),
+        }
+    }
+
     pub fn closes_paper18_theorem(&self) -> bool {
         self.ufts001_upstream_binding_closed
             && self.ufts002_finite_candidate_synthesis_record_closed
@@ -597,7 +684,7 @@ pub fn paper18_skeleton_marker() -> &'static str {
 }
 
 pub fn active_obligation() -> &'static str {
-    "UFTS-005"
+    "UFTS-006"
 }
 
 pub fn is_sha1_hex(value: &str) -> bool {
