@@ -24,25 +24,26 @@ physical nature realization, or physical promotion.
   descriptors without consistency success or risk discharge.
 - `UFTS-005`: Paper 17 compatibility without promotion attempt success,
   promotion success, validation success, or empirical adequacy.
+- `UFTS-006`: Candidate stability, auditability, and rollback behavior without
+  empirical stability, falsification success, or physical failure claims.
 
 ## Active Rung
 
-`UFTS-006`: define candidate stability, auditability, and rollback behavior
-without empirical stability, falsification success, or physical failure claims.
+`UFTS-007`: close a no-hidden-unified-field, physical-nature, validation, or
+promotion import audit.
 
-Required boundary for `UFTS-006`:
+Required boundary for `UFTS-007`:
 
-- finite candidate-revision labels
-- finite audit-event labels
-- finite rollback-trigger labels
-- explicit rollback availability
-- no empirical stability claim
-- no falsification success claim
-- no physical failure, physical validation, or promotion claim
+- no hidden unified-field claim
+- no hidden physical-nature claim
+- no hidden physical-validation claim
+- no hidden empirical-adequacy claim
+- no hidden physical-promotion or promotion-attempt-success claim
+- no simulation-only or fit-only shortcut
+- explicit audit coverage over docs, formal scaffold, and Rust guards
 
 ## Planned Rungs
 
-- `UFTS-007`: no-hidden-unified-field, nature, validation, or promotion audit.
 - `UFTS-008`: final conditional candidate-synthesis certificate.
 
 ## Residual Risk

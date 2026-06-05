@@ -573,6 +573,85 @@ pub fn ufts005_paper17_promotion_attempt_compatibility_closed() -> bool {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct CandidateStabilityAuditRollbackRow {
+    pub row_id: &'static str,
+    pub candidate_revision_labels: &'static [&'static str],
+    pub audit_event_labels: &'static [&'static str],
+    pub rollback_trigger_labels: &'static [&'static str],
+    pub rollback_behavior_label: &'static str,
+    pub rollback_available: bool,
+    pub empirical_stability_claim: bool,
+    pub falsification_success_claim: bool,
+    pub physical_failure_claim: bool,
+    pub claim_boundary: Paper18ClaimBoundary,
+}
+
+impl CandidateStabilityAuditRollbackRow {
+    pub const fn canonical() -> Self {
+        Self {
+            row_id: "ufts-stability-audit-rollback-row-001",
+            candidate_revision_labels: &UFTS006_CANDIDATE_REVISION_LABELS,
+            audit_event_labels: &UFTS006_AUDIT_EVENT_LABELS,
+            rollback_trigger_labels: &UFTS006_ROLLBACK_TRIGGER_LABELS,
+            rollback_behavior_label: "bounded-revert-to-prior-audited-interface-row",
+            rollback_available: true,
+            empirical_stability_claim: false,
+            falsification_success_claim: false,
+            physical_failure_claim: false,
+            claim_boundary: Paper18ClaimBoundary::non_promoting(),
+        }
+    }
+
+    pub fn is_auditable_rollback_non_empirical(&self) -> bool {
+        finite_label(self.row_id)
+            && finite_label_set(self.candidate_revision_labels)
+            && finite_label_set(self.audit_event_labels)
+            && finite_label_set(self.rollback_trigger_labels)
+            && finite_label(self.rollback_behavior_label)
+            && self.rollback_available
+            && !self.empirical_stability_claim
+            && !self.falsification_success_claim
+            && !self.physical_failure_claim
+            && self
+                .claim_boundary
+                .all_unified_field_and_physical_success_claims_remain_false()
+    }
+}
+
+pub const UFTS006_CANDIDATE_REVISION_LABELS: [&str; 3] = [
+    "candidate-interface-r0",
+    "candidate-interface-r1",
+    "candidate-interface-r2",
+];
+pub const UFTS006_AUDIT_EVENT_LABELS: [&str; 4] = [
+    "dependency-map-change",
+    "gate-reference-change",
+    "conflict-row-change",
+    "risk-row-change",
+];
+pub const UFTS006_ROLLBACK_TRIGGER_LABELS: [&str; 4] = [
+    "hidden-promotion-detected",
+    "unbounded-row-detected",
+    "missing-upstream-reference",
+    "claim-boundary-violation",
+];
+
+pub const CANONICAL_UFTS006_ROLLBACK_ROWS: [CandidateStabilityAuditRollbackRow; 1] =
+    [CandidateStabilityAuditRollbackRow::canonical()];
+
+pub fn canonical_ufts006_rollback_rows() -> &'static [CandidateStabilityAuditRollbackRow] {
+    &CANONICAL_UFTS006_ROLLBACK_ROWS
+}
+
+pub fn ufts006_stability_audit_rollback_closed() -> bool {
+    ufts005_paper17_promotion_attempt_compatibility_closed()
+        && !CANONICAL_UFTS006_ROLLBACK_ROWS.is_empty()
+        && CANONICAL_UFTS006_ROLLBACK_ROWS
+            .iter()
+            .all(CandidateStabilityAuditRollbackRow::is_auditable_rollback_non_empirical)
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Paper18SkeletonCertificate {
     pub ufts001_upstream_binding_closed: bool,
     pub ufts002_finite_candidate_synthesis_record_closed: bool,
@@ -664,6 +743,23 @@ impl Paper18SkeletonCertificate {
         }
     }
 
+    pub fn after_ufts006() -> Self {
+        Self {
+            ufts001_upstream_binding_closed: true,
+            ufts002_finite_candidate_synthesis_record_closed:
+                ufts002_finite_candidate_synthesis_record_closed(),
+            ufts003_assumption_dependency_gate_reference_closed:
+                ufts003_assumption_dependency_gate_reference_closed(),
+            ufts004_consistency_conflict_risk_closed: ufts004_consistency_conflict_risk_closed(),
+            ufts005_paper17_promotion_attempt_compatibility_closed:
+                ufts005_paper17_promotion_attempt_compatibility_closed(),
+            ufts006_stability_audit_rollback_closed: ufts006_stability_audit_rollback_closed(),
+            ufts007_no_hidden_unified_field_nature_validation_audit_closed: false,
+            ufts008_final_conditional_certificate_closed: false,
+            claim_boundary: Paper18ClaimBoundary::non_promoting(),
+        }
+    }
+
     pub fn closes_paper18_theorem(&self) -> bool {
         self.ufts001_upstream_binding_closed
             && self.ufts002_finite_candidate_synthesis_record_closed
@@ -684,7 +780,7 @@ pub fn paper18_skeleton_marker() -> &'static str {
 }
 
 pub fn active_obligation() -> &'static str {
-    "UFTS-006"
+    "UFTS-007"
 }
 
 pub fn is_sha1_hex(value: &str) -> bool {

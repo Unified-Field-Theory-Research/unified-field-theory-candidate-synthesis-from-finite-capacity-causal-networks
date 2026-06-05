@@ -3,12 +3,13 @@ use std::path::{Path, PathBuf};
 
 use cclab_accel::{
     active_obligation, canonical_ufts002_records, canonical_ufts003_descriptors,
-    canonical_ufts004_descriptors, canonical_ufts005_compatibility_rows, paper18_skeleton_marker,
+    canonical_ufts004_descriptors, canonical_ufts005_compatibility_rows,
+    canonical_ufts006_rollback_rows, paper18_skeleton_marker,
     ufts002_finite_candidate_synthesis_record_closed,
     ufts003_assumption_dependency_gate_reference_closed, ufts004_consistency_conflict_risk_closed,
-    ufts005_paper17_promotion_attempt_compatibility_closed, Paper18SkeletonCertificate,
-    UFTS001UpstreamBinding, PAPER17_FINAL_CERTIFICATE, PAPER17_FORMAL_ENDPOINT,
-    PAPER17_FROZEN_COMMIT,
+    ufts005_paper17_promotion_attempt_compatibility_closed,
+    ufts006_stability_audit_rollback_closed, Paper18SkeletonCertificate, UFTS001UpstreamBinding,
+    PAPER17_FINAL_CERTIFICATE, PAPER17_FORMAL_ENDPOINT, PAPER17_FROZEN_COMMIT,
 };
 
 fn repo_root() -> PathBuf {
@@ -163,6 +164,29 @@ fn ufts005_keeps_paper17_compatibility_non_promoting() {
 }
 
 #[test]
+fn ufts006_defines_auditable_rollback_without_empirical_stability() {
+    assert!(ufts006_stability_audit_rollback_closed());
+    let rows = canonical_ufts006_rollback_rows();
+    assert_eq!(rows.len(), 1);
+    for row in rows {
+        assert!(row.is_auditable_rollback_non_empirical());
+        assert!(row.rollback_available);
+        assert!(!row.empirical_stability_claim);
+        assert!(!row.falsification_success_claim);
+        assert!(!row.physical_failure_claim);
+        assert!(row
+            .rollback_trigger_labels
+            .contains(&"claim-boundary-violation"));
+    }
+
+    let skeleton = Paper18SkeletonCertificate::after_ufts006();
+    assert!(skeleton.ufts005_paper17_promotion_attempt_compatibility_closed);
+    assert!(skeleton.ufts006_stability_audit_rollback_closed);
+    assert!(!skeleton.ufts007_no_hidden_unified_field_nature_validation_audit_closed);
+    assert!(!skeleton.closes_paper18_theorem());
+}
+
+#[test]
 fn upstream_json_records_paper17_certificate_and_non_uft_boundary() {
     let upstream = read_repo_file("UPSTREAM-PAPERS.json");
     assert!(upstream.contains(PAPER17_FROZEN_COMMIT));
@@ -181,20 +205,21 @@ fn docs_keep_active_rung_and_uft_claims_false() {
     let state_md = read_repo_file("GPD/STATE.md");
     let theorem = read_repo_file("docs/unified_field_theory_candidate_synthesis_theorem.md");
 
-    assert_eq!(active_obligation(), "UFTS-006");
-    assert!(state.contains("\"active_obligation\": \"UFTS-006\""));
+    assert_eq!(active_obligation(), "UFTS-007");
+    assert!(state.contains("\"active_obligation\": \"UFTS-007\""));
     assert!(state.contains("\"unified_field_theory_candidate_synthesis_theorem_closed\": false"));
     assert!(state.contains("\"ufts002_finite_candidate_synthesis_record_closed\": true"));
     assert!(state.contains("\"ufts003_assumption_dependency_gate_reference_closed\": true"));
     assert!(state.contains("\"ufts004_consistency_conflict_risk_closed\": true"));
     assert!(state.contains("\"ufts005_paper17_promotion_attempt_compatibility_closed\": true"));
+    assert!(state.contains("\"ufts006_stability_audit_rollback_closed\": true"));
     assert!(state.contains("\"candidate_synthesis_success_claim\": false"));
     assert!(state.contains("\"unified_field_theory_claim\": false"));
     assert!(state.contains("\"physical_nature_claim\": false"));
     assert!(state.contains("\"physical_validation_claim\": false"));
-    assert!(state_md.contains("`UFTS-005` is closed"));
-    assert!(theorem.contains("UFTS-006"));
-    assert!(theorem.contains("without empirical stability"));
+    assert!(state_md.contains("`UFTS-006` is closed"));
+    assert!(theorem.contains("UFTS-007"));
+    assert!(theorem.contains("no hidden unified-field"));
 }
 
 #[test]

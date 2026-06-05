@@ -25,3 +25,7 @@
   promotion attempt success, promotion success, validation success, or empirical
   adequacy.
 - Advanced the active obligation to `UFTS-006`.
+- Closed `UFTS-006` by adding candidate revision, audit event, rollback trigger,
+  and rollback behavior contracts with rollback availability and without
+  empirical stability, falsification success, or physical failure claims.
+- Advanced the active obligation to `UFTS-007`.
