@@ -7,7 +7,17 @@
   ],
   "formal_module": "FiniteCapacity.UnifiedFieldTheoryCandidateSynthesis",
   "formal_endpoint": "Paper18UnifiedFieldTheoryCandidateSynthesisTheoremContract.closed",
+  "formal_certificate": "paper18_ufts008_final_conditional_certificate_closes_unified_field_theory_candidate_synthesis_theorem",
   "rust_test": "rust/cclab_accel/tests/unified_field_theory_candidate_synthesis.rs",
   "non_promotion_boundary_required": true,
-  "theorem_closed": false
+  "theorem_closed": true,
+  "claim_boundary": {
+    "candidate_synthesis_success_claim": false,
+    "unified_field_theory_claim": false,
+    "physical_nature_claim": false,
+    "physical_promotion_attempt_success_claim": false,
+    "physical_promotion_claim": false,
+    "physical_validation_claim": false,
+    "empirical_adequacy_claim": false
+  }
 }

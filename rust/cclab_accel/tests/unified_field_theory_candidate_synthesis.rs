@@ -268,6 +268,28 @@ fn docs_keep_active_rung_and_uft_claims_false() {
 }
 
 #[test]
+fn publication_artifact_is_self_contained_and_closed_conditionally() {
+    let base = "GPD/publication/unified-field-theory-candidate-synthesis-theorem/manuscript";
+    let paper = read_repo_file(&format!(
+        "{base}/unified_field_theory_candidate_synthesis_theorem.tex"
+    ));
+    let config = read_repo_file(&format!("{base}/PAPER-CONFIG.json"));
+    let reproducibility = read_repo_file(&format!("{base}/reproducibility-manifest.json"));
+    let artifact = read_repo_file(&format!("{base}/ARTIFACT-MANIFEST.json"));
+
+    assert!(paper.contains("Theorem 18"));
+    assert!(paper.contains("The Paper 18 theorem is closed conditionally"));
+    assert!(paper.contains(PAPER18_FINAL_CERTIFICATE));
+    assert!(paper.contains("does not assert a completed unified field theory"));
+    assert!(config.contains("\"theorem_closed\": true"));
+    assert!(config.contains(PAPER18_FINAL_CERTIFICATE));
+    assert!(reproducibility.contains("\"theorem_closed\": true"));
+    assert!(reproducibility.contains(PAPER18_FINAL_CERTIFICATE));
+    assert!(artifact.contains("\"status\": \"closed_conditional\""));
+    assert!(artifact.contains(PAPER18_FINAL_CERTIFICATE));
+}
+
+#[test]
 fn repository_contains_no_python_artifacts() {
     let forbidden = [
         "pyproject.toml",

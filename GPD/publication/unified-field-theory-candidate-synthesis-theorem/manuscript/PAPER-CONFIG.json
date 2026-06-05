@@ -3,8 +3,9 @@
   "paper": 18,
   "title": "Unified Field Theory Candidate Synthesis From Finite-Capacity Causal Networks",
   "short_code": "UFTS",
-  "active_obligation": "UFTS-002",
-  "theorem_closed": false,
+  "active_obligation": "COMPLETE",
+  "theorem_closed": true,
+  "final_certificate": "paper18_ufts008_final_conditional_certificate_closes_unified_field_theory_candidate_synthesis_theorem",
   "upstream_paper": 17,
   "upstream_commit": "5fa387b8aa40ffce1b930b68f6799c37083e21b2"
 }

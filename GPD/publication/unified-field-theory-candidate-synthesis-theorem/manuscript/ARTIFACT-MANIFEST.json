@@ -5,10 +5,12 @@
   "artifacts": [
     "unified_field_theory_candidate_synthesis_theorem.tex",
     "PAPER-CONFIG.json",
-    "reproducibility-manifest.json"
+    "reproducibility-manifest.json",
+    "ARTIFACT-MANIFEST.json"
   ],
   "formal_endpoint": "Paper18UnifiedFieldTheoryCandidateSynthesisTheoremContract.closed",
-  "status": "scaffold_open",
+  "formal_certificate": "paper18_ufts008_final_conditional_certificate_closes_unified_field_theory_candidate_synthesis_theorem",
+  "status": "closed_conditional",
   "claim_boundary": {
     "candidate_synthesis_success_claim": false,
     "unified_field_theory_claim": false,
