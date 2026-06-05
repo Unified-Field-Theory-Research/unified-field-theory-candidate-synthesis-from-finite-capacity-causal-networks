@@ -2,8 +2,7 @@
 
 ## Active
 
-- `UFTS-007`: Close a no-hidden-unified-field, physical-nature, validation, or
-  promotion import audit.
+- `UFTS-008`: Assemble the final conditional candidate-synthesis certificate.
 
 ## Closed
 
@@ -20,6 +19,8 @@
   adequacy.
 - `UFTS-006`: Candidate stability, auditability, and rollback behavior without
   empirical stability, falsification success, or physical failure claims.
+- `UFTS-007`: No-hidden-unified-field, physical-nature, validation, or
+  promotion import audit.
 
 ## Claim Boundary
 

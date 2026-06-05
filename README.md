@@ -14,7 +14,8 @@ Open. `UFTS-001` is closed as an upstream binding to the frozen Paper 17 result.
 descriptor contract. `UFTS-004` is closed as the finite consistency, conflict,
 and residual-risk descriptor contract. `UFTS-005` is closed as the Paper 17
 compatibility contract. `UFTS-006` is closed as the stability, auditability,
-and rollback contract. `UFTS-007` is active.
+and rollback contract. `UFTS-007` is closed as the no-hidden-claim audit.
+`UFTS-008` is active.
 
 The Paper 18 theorem is not closed. This repository does not claim candidate
 synthesis success, a unified field theory, physical nature realization,
@@ -32,8 +33,7 @@ promotion attempt success.
 
 ## Active Obligation
 
-`UFTS-007`: close a no-hidden-unified-field, physical-nature, validation, or
-promotion import audit.
+`UFTS-008`: assemble the final conditional candidate-synthesis certificate.
 
 ## Verification
 

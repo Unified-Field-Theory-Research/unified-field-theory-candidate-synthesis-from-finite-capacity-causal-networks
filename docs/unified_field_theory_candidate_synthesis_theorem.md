@@ -26,25 +26,26 @@ physical nature realization, or physical promotion.
   promotion success, validation success, or empirical adequacy.
 - `UFTS-006`: Candidate stability, auditability, and rollback behavior without
   empirical stability, falsification success, or physical failure claims.
+- `UFTS-007`: No-hidden-unified-field, physical-nature, validation, or
+  promotion import audit.
 
 ## Active Rung
 
-`UFTS-007`: close a no-hidden-unified-field, physical-nature, validation, or
-promotion import audit.
+`UFTS-008`: assemble the final conditional candidate-synthesis certificate.
 
-Required boundary for `UFTS-007`:
+Required boundary for `UFTS-008`:
 
-- no hidden unified-field claim
-- no hidden physical-nature claim
-- no hidden physical-validation claim
-- no hidden empirical-adequacy claim
-- no hidden physical-promotion or promotion-attempt-success claim
-- no simulation-only or fit-only shortcut
-- explicit audit coverage over docs, formal scaffold, and Rust guards
+- every rung `UFTS-001` through `UFTS-007` closed
+- final certificate remains conditional
+- candidate synthesis success remains unclaimed
+- completed unified field theory remains unclaimed
+- physical nature, validation, empirical adequacy, and promotion remain
+  unclaimed
+- simulation-only and fit-only shortcuts remain blocked
 
 ## Planned Rungs
 
-- `UFTS-008`: final conditional candidate-synthesis certificate.
+No planned rungs remain after `UFTS-008`.
 
 ## Residual Risk
 

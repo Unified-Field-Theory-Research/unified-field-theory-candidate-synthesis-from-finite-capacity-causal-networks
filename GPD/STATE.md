@@ -8,7 +8,8 @@ Paper 18 is open.
 `UFTS-003` is closed as the finite assumption, dependency, and gate-reference descriptor contract.
 `UFTS-004` is closed as the finite consistency, conflict, and residual-risk descriptor contract.
 `UFTS-005` is closed as the Paper 17 compatibility contract.
-`UFTS-006` is closed as the stability, auditability, and rollback contract:
+`UFTS-006` is closed as the stability, auditability, and rollback contract.
+`UFTS-007` is closed as the no-hidden-claim audit.
 
 - Paper 17 commit:
   `5fa387b8aa40ffce1b930b68f6799c37083e21b2`
@@ -26,13 +27,12 @@ discharge. Paper 17 compatibility rows are defined without promotion attempt
 success, promotion success, validation success, or empirical adequacy.
 Candidate stability, auditability, and rollback behavior are defined without
 empirical stability, falsification success, or physical failure claims. The
-no-hidden unified-field, nature, validation, and promotion import audit is not
-closed yet.
+no-hidden unified-field, nature, validation, and promotion import audit is
+closed. The final conditional certificate is not closed yet.
 
 ## Active Obligation
 
-`UFTS-007`: close a no-hidden-unified-field, physical-nature, validation, or
-promotion import audit.
+`UFTS-008`: assemble the final conditional candidate-synthesis certificate.
 
 ## Closed Obligations
 
@@ -42,6 +42,7 @@ promotion import audit.
 - `UFTS-004`: Finite consistency, conflict, and residual-risk descriptors.
 - `UFTS-005`: Paper 17 compatibility without promotion attempt success.
 - `UFTS-006`: Candidate stability, auditability, and rollback behavior.
+- `UFTS-007`: No-hidden-claim audit.
 
 ## Claim Boundary
 

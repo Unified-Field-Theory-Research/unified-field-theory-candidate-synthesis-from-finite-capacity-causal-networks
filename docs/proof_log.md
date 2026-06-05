@@ -29,3 +29,8 @@
   and rollback behavior contracts with rollback availability and without
   empirical stability, falsification success, or physical failure claims.
 - Advanced the active obligation to `UFTS-007`.
+- Closed `UFTS-007` by adding a no-hidden-claim audit over docs, Lean formal
+  contracts, Rust guards, and upstream bindings for unified-field, physical
+  nature, validation, empirical-adequacy, promotion, simulation-only, and
+  fit-only claims.
+- Advanced the active obligation to `UFTS-008`.

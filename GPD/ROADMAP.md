@@ -15,15 +15,16 @@
   adequacy.
 - `UFTS-006`: Candidate stability, auditability, and rollback behavior without
   empirical stability, falsification success, or physical failure claims.
+- `UFTS-007`: No-hidden-unified-field, physical-nature, validation, or
+  promotion import audit.
 
 ## Active
 
-- `UFTS-007`: Close a no-hidden-unified-field, physical-nature, validation, or
-  promotion import audit.
+- `UFTS-008`: Assemble the final conditional candidate-synthesis certificate.
 
 ## Planned
 
-- `UFTS-008`: Assemble the final conditional candidate-synthesis certificate.
+No planned rungs remain after `UFTS-008`.
 
 ## Non-Goals
 

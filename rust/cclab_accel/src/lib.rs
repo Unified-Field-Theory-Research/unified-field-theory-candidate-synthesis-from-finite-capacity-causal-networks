@@ -652,6 +652,77 @@ pub fn ufts006_stability_audit_rollback_closed() -> bool {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct NoHiddenClaimAuditRow {
+    pub row_id: &'static str,
+    pub audit_scope_labels: &'static [&'static str],
+    pub no_hidden_unified_field_theory_claim: bool,
+    pub no_hidden_physical_nature_claim: bool,
+    pub no_hidden_physical_validation_claim: bool,
+    pub no_hidden_empirical_adequacy_claim: bool,
+    pub no_hidden_physical_promotion_attempt_success_claim: bool,
+    pub no_hidden_physical_promotion_claim: bool,
+    pub no_hidden_simulation_only_promotion: bool,
+    pub no_hidden_fit_only_calibration: bool,
+    pub claim_boundary: Paper18ClaimBoundary,
+}
+
+impl NoHiddenClaimAuditRow {
+    pub const fn canonical() -> Self {
+        Self {
+            row_id: "ufts-no-hidden-claim-audit-row-001",
+            audit_scope_labels: &UFTS007_AUDIT_SCOPE_LABELS,
+            no_hidden_unified_field_theory_claim: true,
+            no_hidden_physical_nature_claim: true,
+            no_hidden_physical_validation_claim: true,
+            no_hidden_empirical_adequacy_claim: true,
+            no_hidden_physical_promotion_attempt_success_claim: true,
+            no_hidden_physical_promotion_claim: true,
+            no_hidden_simulation_only_promotion: true,
+            no_hidden_fit_only_calibration: true,
+            claim_boundary: Paper18ClaimBoundary::non_promoting(),
+        }
+    }
+
+    pub fn closes_no_hidden_claim_audit(&self) -> bool {
+        finite_label(self.row_id)
+            && finite_label_set(self.audit_scope_labels)
+            && self.audit_scope_labels.contains(&"docs")
+            && self.audit_scope_labels.contains(&"lean-formal")
+            && self.audit_scope_labels.contains(&"rust-guards")
+            && self.audit_scope_labels.contains(&"upstream-bindings")
+            && self.no_hidden_unified_field_theory_claim
+            && self.no_hidden_physical_nature_claim
+            && self.no_hidden_physical_validation_claim
+            && self.no_hidden_empirical_adequacy_claim
+            && self.no_hidden_physical_promotion_attempt_success_claim
+            && self.no_hidden_physical_promotion_claim
+            && self.no_hidden_simulation_only_promotion
+            && self.no_hidden_fit_only_calibration
+            && self
+                .claim_boundary
+                .all_unified_field_and_physical_success_claims_remain_false()
+    }
+}
+
+pub const UFTS007_AUDIT_SCOPE_LABELS: [&str; 4] =
+    ["docs", "lean-formal", "rust-guards", "upstream-bindings"];
+
+pub const CANONICAL_UFTS007_NO_HIDDEN_CLAIM_AUDIT_ROWS: [NoHiddenClaimAuditRow; 1] =
+    [NoHiddenClaimAuditRow::canonical()];
+
+pub fn canonical_ufts007_no_hidden_claim_audit_rows() -> &'static [NoHiddenClaimAuditRow] {
+    &CANONICAL_UFTS007_NO_HIDDEN_CLAIM_AUDIT_ROWS
+}
+
+pub fn ufts007_no_hidden_unified_field_nature_validation_audit_closed() -> bool {
+    ufts006_stability_audit_rollback_closed()
+        && !CANONICAL_UFTS007_NO_HIDDEN_CLAIM_AUDIT_ROWS.is_empty()
+        && CANONICAL_UFTS007_NO_HIDDEN_CLAIM_AUDIT_ROWS
+            .iter()
+            .all(NoHiddenClaimAuditRow::closes_no_hidden_claim_audit)
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Paper18SkeletonCertificate {
     pub ufts001_upstream_binding_closed: bool,
     pub ufts002_finite_candidate_synthesis_record_closed: bool,
@@ -760,6 +831,24 @@ impl Paper18SkeletonCertificate {
         }
     }
 
+    pub fn after_ufts007() -> Self {
+        Self {
+            ufts001_upstream_binding_closed: true,
+            ufts002_finite_candidate_synthesis_record_closed:
+                ufts002_finite_candidate_synthesis_record_closed(),
+            ufts003_assumption_dependency_gate_reference_closed:
+                ufts003_assumption_dependency_gate_reference_closed(),
+            ufts004_consistency_conflict_risk_closed: ufts004_consistency_conflict_risk_closed(),
+            ufts005_paper17_promotion_attempt_compatibility_closed:
+                ufts005_paper17_promotion_attempt_compatibility_closed(),
+            ufts006_stability_audit_rollback_closed: ufts006_stability_audit_rollback_closed(),
+            ufts007_no_hidden_unified_field_nature_validation_audit_closed:
+                ufts007_no_hidden_unified_field_nature_validation_audit_closed(),
+            ufts008_final_conditional_certificate_closed: false,
+            claim_boundary: Paper18ClaimBoundary::non_promoting(),
+        }
+    }
+
     pub fn closes_paper18_theorem(&self) -> bool {
         self.ufts001_upstream_binding_closed
             && self.ufts002_finite_candidate_synthesis_record_closed
@@ -780,7 +869,7 @@ pub fn paper18_skeleton_marker() -> &'static str {
 }
 
 pub fn active_obligation() -> &'static str {
-    "UFTS-007"
+    "UFTS-008"
 }
 
 pub fn is_sha1_hex(value: &str) -> bool {
